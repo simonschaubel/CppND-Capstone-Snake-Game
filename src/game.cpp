@@ -22,13 +22,12 @@ void Game::Run(std::size_t target_frame_duration) {
   Uint32 frame_end;
   Uint32 frame_duration;
   int frame_count = 0;
-  bool running = true;
 
-  while (running) {
+  while (_running) {
     frame_start = SDL_GetTicks();
 
     // Input, Update, Render - the main game loop.
-    _controller->HandleInput(running, snake);
+    HandleInput();
     Update();
     _renderer->Render(snake, food);
 
@@ -52,6 +51,35 @@ void Game::Run(std::size_t target_frame_duration) {
     if (frame_duration < target_frame_duration) {
       SDL_Delay(target_frame_duration - frame_duration);
     }
+  }
+}
+
+void Game::HandleInput(){
+  _controller->ReadInput();
+  _running = !_controller->GetQuitInput();
+  auto direction = _controller->GetArrowInput();
+  VerifyDirection(direction);
+}
+
+void Game::VerifyDirection(Snake::Direction direction){
+  if (snake.size == 1){
+    snake.direction = direction;
+    return;
+  }
+
+  switch (direction){
+    case (Snake::Direction::kUp):
+      if (snake.direction != Snake::Direction::kDown) snake.direction = Snake::Direction::kUp;
+      break;
+    case (Snake::Direction::kDown):
+      if (snake.direction != Snake::Direction::kUp) snake.direction = Snake::Direction::kDown;
+      break;
+    case (Snake::Direction::kRight):
+      if (snake.direction != Snake::Direction::kLeft) snake.direction = Snake::Direction::kRight;
+      break;
+    case (Snake::Direction::kLeft):
+      if (snake.direction != Snake::Direction::kRight) snake.direction = Snake::Direction::kLeft;
+      break;
   }
 }
 

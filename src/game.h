@@ -16,7 +16,7 @@ class Game {
   void Run(std::size_t target_frame_duration);
   int GetScore() const;
   int GetSize() const;
-
+  
  private:
   Snake snake;
   SDL_Point food;
@@ -29,10 +29,13 @@ class Game {
   std::unique_ptr<Controller> _controller;
   std::unique_ptr<Renderer> _renderer;
 
+  bool _running{true};
   int score{0};
 
   void PlaceFood();
   void Update();
+  void HandleInput();
+  void VerifyDirection(Snake::Direction direction);
 };
 
 #endif
