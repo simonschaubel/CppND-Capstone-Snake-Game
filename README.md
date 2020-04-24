@@ -29,3 +29,11 @@ In this project, you can build your own C++ application or extend this Snake gam
 2. Make a build directory in the top level directory: `mkdir build && cd build`
 3. Compile: `cmake .. && make`
 4. Run it: `./SnakeGame`.
+
+## Addressed Rubics
+
+1. The project uses Object Oriented Programming techniques. -> Adaptions to Game and Controller Class
+2. Classes use appropriate access specifiers for class members. -> Adaptions to Controller Class
+3. The project makes use of references in function declarations. -> See: Game::VerifyDirection
+4. The project uses smart pointers instead of raw pointers. -> Check main() and Game
+5. The project uses move semantics to move data, instead of copying it, where possible. -> Unique Pointer
