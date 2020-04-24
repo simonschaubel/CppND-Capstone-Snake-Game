@@ -61,7 +61,7 @@ void Game::HandleInput(){
   VerifyDirection(direction);
 }
 
-void Game::VerifyDirection(Snake::Direction direction){
+void Game::VerifyDirection(const Snake::Direction& direction){
   if (snake.size == 1){
     snake.direction = direction;
     return;

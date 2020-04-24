@@ -35,7 +35,7 @@ class Game {
   void PlaceFood();
   void Update();
   void HandleInput();
-  void VerifyDirection(Snake::Direction direction);
+  void VerifyDirection(const Snake::Direction& direction);
 };
 
 #endif
